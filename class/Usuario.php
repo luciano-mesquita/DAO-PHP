@@ -102,6 +102,33 @@ class Usuario {
 		}
 	}
 
+	// Função de inserção que chama a procedure
+	public function insert() {
+
+		$banco = new Banco();
+
+		$results = $banco->select("CALL sp_usuario_insert(:NOME, :EMAIL, :SENHA)", array(
+			':NOME'=>$this->getNome(),
+			':EMAIL'=>$this->getEmail(),
+			':SENHA'=>$this->getSenha()
+		));
+	}
+
+	public function update($email, $senha) {
+
+		$this->setEmail($email);
+		$this->setSenha($senha);
+
+		$banco = new Banco();
+
+		$banco->query("UPDATE usuario SET nome = :NOME, email = :EMAIL, senha = :SENHA WHERE id = :ID", array(
+			':ID'=>$this->getId(),
+			':NOME'=>$this->getNome(),
+			':EMAIL'=>$this->getEmail(),
+			':SENHA'=>$this->getSenha()
+		));
+	}
+
 	// Retorna um JSON com os dados de um determinado usuário
 	public function __toString() {
 
