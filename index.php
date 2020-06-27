@@ -1,9 +1,13 @@
 <?php
 
+// Carregando o arquivo de configuração
 require_once("config.php");
 
-$banco = new Banco();
+// Criando um usuário
+$usuario1 = new Usuario();
 
-$usuarios = $banco->select("SELECT * FROM usuario");
+// Utilizando um método para carregar os dados do usuário
+$usuario1->loadById(5);
 
-echo json_encode($usuarios);
+// Exibindo os dados carregados
+echo $usuario1;
