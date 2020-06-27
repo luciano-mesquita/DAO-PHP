@@ -39,7 +39,7 @@ class Usuario {
 		$this->senha = $senha;
 	}
 
-	// Função que pega os dados de um usuário no banco e carrega a classe
+	// Pega os dados de um usuário no banco e carrega a classe
 	public function loadById($id) {
 
 		$banco = new Banco();
@@ -102,7 +102,7 @@ class Usuario {
 		}
 	}
 
-	// Função de inserção que chama a procedure
+	// Insere dados e chama procedure
 	public function insert() {
 
 		$banco = new Banco();
@@ -114,6 +114,7 @@ class Usuario {
 		));
 	}
 
+	// Atualiza um registro
 	public function update($email, $senha) {
 
 		$this->setEmail($email);
@@ -140,5 +141,21 @@ class Usuario {
 		));
 
 		return $dados;
+	}
+
+	// Remove um registro do banco
+	public function delete() {
+
+		$banco = new Banco();
+
+		$banco->query("DELETE FROM usuario WHERE id = :ID", array(
+
+			':ID'=>$this->getId()
+		));
+
+		$this->setId(0);
+		$this->setNome("");
+		$this->setEmail("");
+		$this->setSenha("");
 	}
 }

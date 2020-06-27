@@ -28,7 +28,12 @@ require_once("config.php");
 //$aluno->insert();
 //echo $aluno;
 
+// Atualizando um registro
+//$usuario = new Usuario();
+//$usuario->loadById(4);
+//$usuario->update("professor", "234565eknf");
+
 $usuario = new Usuario();
 $usuario->loadById(4);
-
-$usuario->update("professor", "234565eknf");
+$usuario->delete();
+echo $usuario;
